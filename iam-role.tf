@@ -114,15 +114,16 @@ resource "aws_iam_role_policy" "pipeline_policy" {
             "appconfig:StartDeployment",
             "appconfig:StopDeployment",
             "appconfig:GetDeployment",
-            "codestar-connections:UseConnection"
           ]
           Effect   = "Allow"
-          Resource = "*"
+          Resource = [
+            "*"
+          ]
         },
         {
-          Action   = var.pipeline_policy_actions
+          Action   = var.pipeline_policy["actions"]
           Effect   = "Allow"
-          Resource = "*"
+          Resource = var.pipeline_policy["resources"]
         }
       ]
     }
