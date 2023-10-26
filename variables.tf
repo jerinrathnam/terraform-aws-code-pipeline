@@ -104,7 +104,7 @@ variable "service_name" {
 variable "ecs_file_name" {
   type        = string
   description = "Name of the file for ECS deployment"
-  default     = "imagedefinitions.json"
+  default     = null
 }
 
 variable "tags" {
@@ -113,10 +113,11 @@ variable "tags" {
   default     = {}
 }
 
-variable "pipeline_policy_actions" {
-  type        = list(string)
-  description = "List of actions need to give access to pipeline"
-  default = [
+variable "pipeline_policy" {
+  type        = map
+  description = "List of actions and resources need to give access to pipeline"
+  default = {
+  "actions" = [
     "elasticbeanstalk:*",
     "ec2:*",
     "elasticloadbalancing:*",
@@ -129,6 +130,8 @@ variable "pipeline_policy_actions" {
     "sqs:*",
     "ecs:*"
   ]
+  resources = ["*"]
+  }
 }
 
 variable "pipeline_role_arn" {

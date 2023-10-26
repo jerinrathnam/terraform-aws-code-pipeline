@@ -56,6 +56,7 @@ resource "aws_codepipeline" "this" {
         input_artifacts  = ["source_output"]
         output_artifacts = ["build_output"]
         version          = "1"
+        run_order        = 1
 
         configuration = {
           ProjectName = one(aws_codebuild_project.this[*].name)
